@@ -1,0 +1,149 @@
+﻿<!-- StaffView List -->
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="10*"/>
+                </Grid.RowDefinitions>
+
+                <!-- Filter Area for List -->
+                <Grid Grid.Row="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Grid.Column="0" Text="Filter by Name: " VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    <TextBox Grid.Column="1" x:Name="FilterStaffList" MaxLength="12" VerticalAlignment="Center" HorizontalAlignment="Stretch"/>
+
+                </Grid>
+
+                <!-- Show set staff types All/Academic/Tech/Admin/Casual -->
+                <Grid Grid.Row="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="2*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Grid.Column="0" Text="Show:" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    <ComboBox Grid.Column="1">
+                        <ComboBoxItem Content="All"/>
+                        <ComboBoxItem Content="Academic"/>
+                        <ComboBoxItem Content="Technical"/>
+                        <ComboBoxItem Content="Administrative"/>
+                        <ComboBoxItem Content="Casual"/>
+                    </ComboBox>
+
+                </Grid>
+                
+                <!-- List_Display Area -->
+                <Grid x:Name="ListDisplayArea" Grid.Row="2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <!-- StaffList -->
+                    <ListBox ItemsSource=
+                             "{Binding Source={StaticResource StaffDataSource}}"
+                             ItemTemplate=
+                             "{Binding Source={StaticResource StaffListTemplate}}"
+                             HorizontalContentAlignment="Stretch"
+                             ScrollViewer.VerticalScrollBarVisibility="Auto"
+                             SelectionChanged="ListBox_SelectionChanged" Grid.ColumnSpan="2"/>
+
+                </Grid>
+
+            </Grid>
+
+
+
+
+
+			-------------------------------------
+
+
+	<!-- StaffDetails View -->
+            <StackPanel>
+
+                <Grid x:Name="StaffDetailsPanel">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="3*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <!-- Just Text information -->
+                    <StackPanel Margin="10 0" Grid.Column="0">
+                        <TextBlock Text="Given Name: "/>
+                        <TextBlock Text="Family Name: "/>
+                        <TextBlock Text="Phone Number: "/>
+                        <TextBlock Text="Email Address: "/>
+                        <TextBlock Text="Campus: "/>
+                        <TextBlock Text="Room Location: "/>
+                    </StackPanel>
+
+                    <!-- Displays Various fields to the user when a staffmember is selected in the StaffList-->
+                    <StackPanel Margin="10 0" Grid.Column="1">
+                        <TextBlock Text="{Binding Path=GivenName}"/>
+                        <TextBlock Text="{Binding Path=FamilyName}"/>
+                        <TextBlock Text="{Binding Path=PhoneNumber}"/>
+                        <TextBlock Text="{Binding Path=Email}"/>
+                        <TextBlock Text="{Binding Path=Campus}"/>
+                        <TextBlock Text="{Binding Path=RoomLocation}"/>
+                    </StackPanel>
+
+                    <!-- Displays Photo to the user of the selected staffmember in the STaffList-->
+                    <Grid Grid.Column="2">
+                        <TextBlock Text="{Binding Path=Photo}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Grid>
+
+
+                </Grid>
+
+                <!-- Displays ConsultationHours -->
+                <Grid x:Name="ConsultationHoursPanel">
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    
+                    <!-- Shows title for Consultation hours-->
+                    <Grid Grid.Row="0" >
+                        <TextBlock Margin="10 0"  Text="Consultation hours:"/>
+                    </Grid>
+                    
+                    <!-- Contains the Listbox which will have the times and days staffmember is consulting-->
+                    <Grid Grid.Row="1">
+                        <ListBox Margin="10 5" MinHeight="20"/>
+                    </Grid>
+                </Grid>
+
+                <!-- Displays what subjects the staffmember is teaching this semester -->
+                <Grid Margin="0 10"  x:Name="TeachingPanel">
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <!-- Shows title -->
+                    <Grid Grid.Row="0" >
+                        <TextBlock Margin="10 0"  Text="Teaching this semester:"/>
+                    </Grid>
+
+                    <!-- Contains the Listbox which will have the subjects staff member is teaching-->
+                    <Grid Grid.Row="1">
+                        <ListBox Margin="10 5" MinHeight="20"/>
+                    </Grid>
+                    
+                </Grid>
+                
+                <!-- Activity Map -->
+                <Grid>
+                    <Button Margin="10 0 0 0" Content="Activity Map" MaxWidth="80" HorizontalAlignment="Left"/>
+
+                </Grid>
+
+            </StackPanel>

@@ -1,0 +1,65 @@
+﻿<UserControl x:Class="HRIS.UnitDetailsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:HRIS"
+             mc:Ignorable="d" 
+             d:DesignHeight="650" d:DesignWidth="800">
+    <Grid x:Name="UnitDetailsPanel" x:FieldModifier="public" >
+        <!-- StaffDetails View -->
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="3*"/>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        
+        <!-- Shows the current selected Unit Name -->
+        <Grid Grid.Column="0" Grid.Row="0">
+            <TextBlock Margin="10" FontSize="20" Text="{Binding Path=Code}"/>
+        </Grid>
+        
+        <!-- Button used to show clash map -->
+        <Grid Grid.Column="1" Grid.Row="0">
+            <Button Content="Clash Map" MaxHeight="20" MaxWidth="75" VerticalAlignment="Bottom"/>
+        </Grid>
+
+        <!-- Filter list -->
+        <Grid Grid.Column="2" Grid.Row="0">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Filter by Campus: " VerticalAlignment="Bottom"/>
+                <ComboBox x:Name="UnitListCampus" Grid.Column="1" MaxHeight="20" Width="100"  VerticalAlignment="Bottom" 
+                      ItemsSource="{Binding Source={StaticResource CampusValues}}"
+                      SelectedIndex="0"
+                      SelectionChanged="ComboBox_SelectionChanged"/>
+
+            </StackPanel>
+        </Grid>
+
+        <Grid Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3">
+
+            <DataGrid x:Name="ClassGrid" ItemsSource="{Binding Path=UnitDetails}"
+                      Grid.Row="1"
+                      Margin="10"  
+                      IsReadOnly="True" 
+                      AutoGenerateColumns="False"
+                      DataGridCell.Selected="ClassGrid_Selected">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="StartTime" Binding="{Binding Start}"/>
+                    <DataGridTextColumn Header="EndTime" Binding="{Binding End}"/>
+                    <DataGridTextColumn Header="Type" Binding="{Binding Type}"/>
+                    <DataGridTextColumn Header="Room Location" Binding="{Binding Room}"/>
+                    <DataGridTextColumn Header="Campus" Binding="{Binding Campus}"/>
+                    <DataGridTextColumn Header="Staff Member" Binding="{Binding Staff}"/>
+                </DataGrid.Columns>
+                
+            </DataGrid>
+        </Grid>
+
+    </Grid>
+</UserControl>

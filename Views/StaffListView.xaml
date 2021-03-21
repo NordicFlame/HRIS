@@ -1,0 +1,63 @@
+﻿<UserControl x:Class="HRIS.StaffListView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:HRIS"
+             mc:Ignorable="d" 
+             d:DesignHeight="546.429" d:DesignWidth="236.352">
+    
+    
+    <!-- StaffView List -->
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="10*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Filter Area for List -->
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Grid.Column="0" Text="Filter by Name: " VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            <TextBox x:Name="FilterStaffList" Grid.Column="1" MaxLength="12" VerticalAlignment="Center" HorizontalAlignment="Stretch" 
+                     KeyUp="FilterStaff_KeyUp"/>
+
+        </Grid>
+
+        <!-- Show set staff types All/Academic/Tech/Admin/Casual -->
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="2*"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Grid.Column="0" Text="Show:" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            <ComboBox x:Name="StaffListCategory" Grid.Column="1" MaxHeight="20" 
+                      ItemsSource="{Binding Source={StaticResource CategoryValues}}"
+                      SelectedIndex="0"
+                      SelectionChanged="ComboBox_SelectionChanged"/>
+            
+
+        </Grid>
+
+        <!-- List_Display Area -->
+        <Grid x:Name="ListDisplayArea" Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- StaffList -->
+            <ListBox x:Name="StaffListBox" HorizontalContentAlignment="Stretch" ScrollViewer.VerticalScrollBarVisibility="Auto" SelectionChanged="ListBox_SelectionChanged" Grid.ColumnSpan="2"
+                ItemsSource="{Binding Source={StaticResource StaffListDataSource}}"
+                ItemTemplate="{Binding Source={StaticResource StaffListTemplate}}"/>
+
+        </Grid>
+
+    </Grid>
+</UserControl>
